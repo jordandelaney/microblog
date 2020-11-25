@@ -29,7 +29,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = [
     'localhost',
-    'jd-miniblog.herokuapp.com', 
+    'jd-microblog.herokuapp.com', 
     '127.0.0.1',
 ]
 
