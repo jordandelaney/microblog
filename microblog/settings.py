@@ -27,7 +27,11 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 # DEBUG = True
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = [
+    'localhost',
+    'jd-miniblog.herokuapp.com', 
+    '127.0.0.1',
+]
 
 CSRF_COOKIE_SECURE = True
 
