@@ -1,0 +1,16 @@
+{% extends "blog/base_generic.html" %}
+
+{% block content %}
+
+<h1>Delete Post: {{ blogpost.title }}</h1>
+<div class="alert alert-danger">
+  <strong>Warning!</strong> This action cannot be reversed. Your post will be permanently deleted.
+</div>
+
+<form action="" method="POST">
+    {% csrf_token %}
+        <button name="submit" class="btn btn-danger">Delete</button>
+        <input type="hidden" name="next" value="/">
+</form>
+
+{% endblock %}

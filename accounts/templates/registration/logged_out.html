@@ -1,0 +1,7 @@
+{% extends "blog/base_generic.html" %}
+
+{% block content %}
+<h2>You have been logged out.</h2>
+<p>Would you like to <a href="{% url 'accounts:login' %}">login</a> again?</p>
+
+{% endblock content %}

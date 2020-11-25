@@ -1,0 +1,37 @@
+{% extends 'blog/base_generic.html' %}
+
+{% block content %}
+<h1>All posts</h1>
+{% if blogpost_list %}
+    {% for post in blogpost_list %}
+            <div class="shadow p-4 mb-4 bg-white">
+            	<a href="{% url 'blog:post-detail' post.pk post.slug %}"><h3>{{ post.title }}{% if post.is_new %} <span class="badge badge-pill badge-secondary">New</span></h3>{% endif %}</a></h3>
+            	<h5><small class="text-muted"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  				<path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+				</svg> Posted By: <a href="{% url 'blog:blogger-detail' post.blogger.username %}">{{ post.blogger.first_name }} {{ post.blogger.last_name }}</a> on {{ post.date_added|date:"F jS, Y" }}</small></h5>
+				<hr>
+            	<p>{{ post.content|safe }}</p>
+            	{% if user.is_anonymous %}
+            	<a class="btn btn-sm btn-primary" href="{% url 'blog:post-detail' post.pk post.slug %}#comments">View Comments ({{ post.comment_set.count }})</a>
+            </div>
+            	{% endif %}
+            	{% if user.is_authenticated %}
+            	<div class="btn group btn-group-sm" role="group">
+            		<a class="btn btn-primary" href="{% url 'blog:post-detail' post.pk post.slug %}#comments">View Comments ({{ post.comment_set.count }})</a> 
+            			<a class="btn btn-primary" href="{% url 'blog:post-detail' post.pk post.slug %}#add_comment">Add a Comment</a>
+            			{% if request.user == post.blogger %}
+            				<div class="btn-group btn-group-sm" role="group">
+            				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Controls</button>
+            				<div class="dropdown-menu">
+            				<a class="dropdown-item" href="{% url 'blog:edit-post' post.pk %}">Edit Post</a> <a class="dropdown-item" href="{% url 'blog:delete-post' post.pk %}">Delete Post</a>
+            				</div>
+            		</div>
+            	</div>
+            			{% endif %}
+            </div>
+            {% endif %}
+    {% endfor %}
+{% else %}
+    <p>There are no posts yet.</p>
+{% endif %}
+{% endblock content %}

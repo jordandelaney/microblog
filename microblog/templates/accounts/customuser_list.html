@@ -1,0 +1,13 @@
+{% extends 'blog/base_generic.html' %}
+
+{% block content %}
+<h1>List of all Bloggers</h1>
+<ul>
+{% if customuser_list %}
+    {% for blogger in customuser_list %}
+        <li>{{ blogger.first_name }} {{ blogger.last_name }} <a href="{% url 'blog:blogger-detail' post.blogger.username %}">({{ blogger.username }})</a></li>
+    {% endfor %}
+{% else %
+    <p>There are no bloggers, yet.</p>
+{% endif %}
+{% endblock content %}
