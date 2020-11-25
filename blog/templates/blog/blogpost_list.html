@@ -13,7 +13,6 @@
             	<p>{{ post.content|safe }}</p>
             	{% if user.is_anonymous %}
             	<a class="btn btn-sm btn-primary" href="{% url 'blog:post-detail' post.pk post.slug %}#comments">View Comments ({{ post.comment_set.count }})</a>
-            </div>
             	{% endif %}
             	{% if user.is_authenticated %}
             	<div class="btn group btn-group-sm" role="group">
@@ -26,10 +25,10 @@
             				<a class="dropdown-item" href="{% url 'blog:edit-post' post.pk %}">Edit Post</a> <a class="dropdown-item" href="{% url 'blog:delete-post' post.pk %}">Delete Post</a>
             				</div>
             		</div>
-            	</div>
             			{% endif %}
-            </div>
+                    </div>
             {% endif %}
+            </div>
     {% endfor %}
 {% else %}
     <p>There are no posts yet.</p>
